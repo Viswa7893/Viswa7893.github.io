@@ -186,12 +186,41 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Navigation click handler with offset
+    // // Navigation click handler with offset
+    // navLinks.forEach(link => {
+    //     link.addEventListener('click', (e) => {
+    //         e.preventDefault();
+            
+    //         const targetId = link.getAttribute('href');
+    //         const targetSection = document.querySelector(targetId);
+            
+    //         navLinks.forEach(a => a.classList.remove('active'));
+    //         link.classList.add('active');
+            
+    //         const offset = 50;
+    //         const targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset - offset;
+            
+    //         window.scrollTo({
+    //             top: targetPosition,
+    //             behavior: 'smooth'
+    //         });
+    //     });
+    // });
+
+        // Navigation click handler with offset
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
-            e.preventDefault();
+            const href = link.getAttribute('href');
             
-            const targetId = link.getAttribute('href');
+            // Check if this is an external link (like resume)
+            if (href.startsWith('http') || href.startsWith('https')) {
+                // Let the default behavior happen for external links
+                return;
+            }
+            
+            // For internal navigation
+            e.preventDefault();
+            const targetId = href;
             const targetSection = document.querySelector(targetId);
             
             navLinks.forEach(a => a.classList.remove('active'));
