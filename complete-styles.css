@@ -99,10 +99,10 @@ body {
 }
 
 /* Main Content Layout */
-#main-content {
+/* #main-content {
     margin-left: 300px;
     padding: 3em;
-}
+} */
 
 section {
     margin-bottom: 4em;
@@ -642,7 +642,7 @@ footer {
 /* Update main content margin for footer */
 #main-content {
 /*     margin-left: 300px; */
-    padding: 3em;
+/*     padding: 3em; */
     min-height: calc(100vh - 80px);
 }
 
