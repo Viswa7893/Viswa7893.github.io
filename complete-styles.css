@@ -99,10 +99,10 @@ body {
 }
 
 /* Main Content Layout */
-/* #main-content {
+#main-content {
     margin-left: 300px;
     padding: 3em;
-} */
+}
 
 section {
     margin-bottom: 4em;
