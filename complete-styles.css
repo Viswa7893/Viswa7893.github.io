@@ -1,7 +1,7 @@
 /* CSS Reset and Base Styles */
 :root {
     --primary-gradient: linear-gradient(135deg, #6228d7 0%, #ee2a7b 55%, #b9930b 100%);
-    --sidebar-gradient: linear-gradient(135deg, #4F46E5 0%, #7C3AED 30%, #EC4899 100%);
+    --sidebar-gradient: linear-gradient(135deg, #614385 30%, #516395 100%);
     --content-gradient: linear-gradient(135deg, rgba(79, 70, 229, 0.1) 0%, rgba(236, 72, 153, 0.1) 100%);
     --hover-gradient: linear-gradient(135deg, rgba(79, 70, 229, 0.15) 0%, rgba(236, 72, 153, 0.15) 100%);
     --text-primary: #e0e0e0;

@@ -1,6 +1,6 @@
 const portfolioData = {
     about: {
-        greeting: "Hi, I'm Nemala Durga Viswanadh!",
+        greeting: "Hi, I'm Durga Viswanadh Nemala!",
         description: "I am a passionate and skilled iOS and macOS developer with a strong focus on creating seamless, high-performing applications using Swift, SwiftUI, and Objective-C, delivering smooth user experiences within Apple's ecosystem."
     },
     
