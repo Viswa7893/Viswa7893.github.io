@@ -106,7 +106,7 @@ const portfolioData = {
 
     experience: [
         {
-            period: "August 2022 - Present",
+            period: "August 2022 - January 2025",
             title: "iOS and macOS Developer",
             company: "Krify Software Technologies",
             responsibilities: [
