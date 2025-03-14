@@ -237,6 +237,7 @@ section:hover {
 /* Typography */
 h1, .highlight {
     background: var(--primary-gradient);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
