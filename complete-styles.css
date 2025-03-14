@@ -660,6 +660,7 @@ h1 {
     color: var(--accent-color);
     text-decoration: none;
     transition: var(--transition-standard);
+    word-break: break-all;
 }
 
 .email-link:hover {
@@ -668,6 +669,7 @@ h1 {
 
 .email-link i {
     font-size: 1.2em;
+    flex-shrink: 0;
 }
 
 .phone-link {
@@ -848,6 +850,22 @@ h1 {
     .project-tech-tag {
         font-size: 0.8em;
         padding: 0.3em 0.6em;
+    }
+
+    .contact-info {
+        padding: 1.5em;
+    }
+
+    .contact-info p {
+        font-size: 1em;
+    }
+
+    .email-link, .phone-link {
+        font-size: 0.9em;
+    }
+
+    .email-link i, .phone-link i {
+        font-size: 1.1em;
     }
 }
 
