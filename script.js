@@ -1,4 +1,38 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Mobile menu functionality
+    const mobileToggle = document.querySelector('.mobile-nav-toggle');
+    const sidebar = document.getElementById('sidebar');
+    const body = document.body;
+    const mobileNavLinks = document.querySelectorAll('.nav-menu a');
+
+    mobileToggle.addEventListener('click', () => {
+        sidebar.classList.toggle('active');
+        mobileToggle.classList.toggle('active');
+        body.classList.toggle('menu-active');
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (sidebar.classList.contains('active') &&
+            !sidebar.contains(e.target) &&
+            !mobileToggle.contains(e.target)) {
+            sidebar.classList.remove('active');
+            mobileToggle.classList.remove('active');
+            body.classList.remove('menu-active');
+        }
+    });
+
+    // Close menu when clicking on a link (for mobile)
+    mobileNavLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth <= 992) {
+                sidebar.classList.remove('active');
+                mobileToggle.classList.remove('active');
+                body.classList.remove('menu-active');
+            }
+        });
+    });
+
     // Intersection Observer for scroll animations
     const observerOptions = {
         root: null,
