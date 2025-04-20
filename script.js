@@ -110,6 +110,33 @@ document.addEventListener('DOMContentLoaded', () => {
         animateOnScroll.observe(li);
     });
     
+    // Populate Frameworks section with animation
+    const frameworksList = document.getElementById('frameworks-list');
+    if (frameworksList) {
+        portfolioData.frameworks.forEach((repo, index) => {
+            const li = document.createElement('li');
+            li.className = 'framework-card animate-section';
+            li.style.transitionDelay = `${index * 0.2}s`;
+            li.innerHTML = `
+                <img src="${repo.previewImage}" class="project-image" alt="${repo.name} Preview">
+                <div class="project-content">
+                    <h3 class="project-title">${repo.name}</h3>
+                    <p class="project-description">${repo.description}</p>
+                    <div class="project-footer">
+                        <div class="project-repositories">
+                            <a href="${repo.url}" class="repo-link" target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-github"></i>
+                                <span>GitHub</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `;
+            frameworksList.appendChild(li);
+            animateOnScroll.observe(li);
+        });
+    }
+
     // Populate Experience section with animation
     const experienceContent = document.getElementById('experience-content');
     portfolioData.experience.forEach((job, index) => {

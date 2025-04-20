@@ -1,4 +1,12 @@
 const portfolioData = {
+    frameworks: [
+        {
+            name: "DVSwiftNet",
+            url: "https://github.com/Viswa7893/DVSwiftNet",
+            description: "A modern, extensible, and lightweight Swift networking framework for iOS, macOS, and cross-platform Swift projects.",
+            previewImage: "https://opengraph.githubassets.com/1/Viswa7893/DVSwiftNet"
+        },
+    ],
     about: {
         greeting: "Hi, I'm Durga Viswanadh Nemala!",
         description: "I am a passionate and skilled iOS and macOS developer with a strong focus on creating seamless, high-performing applications using Swift, SwiftUI, and Objective-C, delivering smooth user experiences within Apple's ecosystem."

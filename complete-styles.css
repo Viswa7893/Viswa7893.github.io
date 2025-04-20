@@ -277,16 +277,16 @@ h1 {
 }
 
 /* Projects Grid */
-.projects-list {
+.projects-list, .frameworks-list {
     list-style: none;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
     gap: 2em;
     padding: 0;
     justify-items: center;
 }
 
-.project-card {
+.project-card, .framework-card {
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid var(--border-color);
     border-radius: 20px;
@@ -296,6 +296,34 @@ h1 {
     position: relative;
     width: 100%;
     max-width: 500px;
+}
+
+.framework-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: var(--transition-bounce);
+    backdrop-filter: blur(12px);
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    min-width: 0;
+    min-height: 320px;
+}
+
+@media (max-width: 600px) {
+    .framework-card, .project-card {
+        max-width: 98vw;
+        min-width: 0;
+    }
+    .projects-list, .frameworks-list {
+        grid-template-columns: 1fr;
+        gap: 1em;
+    }
+    .project-image {
+        height: 200px;
+    }
 }
 
 .project-card::before {
