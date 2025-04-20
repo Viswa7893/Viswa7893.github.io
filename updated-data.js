@@ -69,7 +69,7 @@ const portfolioData = {
             ],
             appstoreUrl: [
                 {
-                    name: "YourMoca",
+                    name: "Your Moca",
                     url: "https://apps.apple.com/in/app/yourmoca/id67427456675",
                     icon: "fa-app-store"
                 }
