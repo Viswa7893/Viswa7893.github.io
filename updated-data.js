@@ -68,7 +68,11 @@ const portfolioData = {
                 "Gathered client feedback for continuous improvement and implemented new features based on feedback and business needs"
             ],
             appstoreUrl: [
-
+                {
+                    name: "YourMoca",
+                    url: "https://apps.apple.com/in/app/yourmoca/id67427456675",
+                    icon: "fa-app-store"
+                }
             ],
             previewImage: "projectIcons/yourmoca.jpg"
         },
