@@ -85,9 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="project-content">
                 <h3 class="project-title">${project.title}</h3>
                 <p class="project-description">${project.description}</p>
-                <ul class="project-highlights">
-                    ${project.highlights.map(highlight => `<li>${highlight}</li>`).join('')}
-                </ul>
+
                 <div class="project-footer">
                     <div class="project-technologies">
                         ${project.technologies.map(tech => `

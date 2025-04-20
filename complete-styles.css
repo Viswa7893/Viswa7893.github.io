@@ -308,21 +308,49 @@ h1 {
     position: relative;
     width: 100%;
     max-width: 500px;
-    min-width: 0;
     min-height: 320px;
 }
 
+.framework-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--content-gradient);
+    opacity: 0;
+    transition: var(--transition-standard);
+    z-index: -1;
+}
+
+.framework-card:hover {
+    transform: translateY(-15px) scale(1.02);
+    box-shadow: var(--card-shadow);
+    border-color: var(--accent-color);
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(12px);
+}
+
+.framework-card:hover::before {
+    opacity: 1;
+}
+
+
 @media (max-width: 600px) {
-    .framework-card, .project-card {
-        max-width: 98vw;
-        min-width: 0;
-    }
     .projects-list, .frameworks-list {
         grid-template-columns: 1fr;
         gap: 1em;
     }
+    .framework-card, .project-card {
+        max-width: calc(100vw - 2em);
+        min-width: 0;
+        min-height: 200px;
+    }
     .project-image {
-        height: 200px;
+        height: 180px;
+        min-height: 120px;
+        max-height: 220px;
     }
 }
 
@@ -475,6 +503,25 @@ h1 {
     border: 1px solid var(--border-color);
     transition: var(--transition-standard);
     font-size: 0.9em;
+}
+
+.project-card .repo-link,
+.framework-card .repo-link {
+    background: linear-gradient(135deg, #2dd4bf 0%, #818cf8 50%, #c084fc 100%);
+    color: #fff;
+    border: none;
+    box-shadow: 0 2px 16px 0 rgba(129, 140, 248, 0.12);
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    transition: background 0.4s cubic-bezier(0.4,0,0.2,1), color 0.3s;
+}
+
+.project-card .repo-link:hover,
+.framework-card .repo-link:hover {
+    background: linear-gradient(135deg, #c084fc 0%, #818cf8 50%, #2dd4bf 100%);
+    color: #fff;
+    border: none;
+    box-shadow: 0 4px 24px 0 rgba(129, 140, 248, 0.18);
 }
 
 .repo-link:hover {
