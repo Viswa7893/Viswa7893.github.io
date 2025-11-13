@@ -194,7 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 ${portfolioData.contact.email}
             </a>
           <br></br>
-           <a href="" class="phone-link">
+           <a href="tel:+91 9133951393" class="phone-link">
                 <i class="fas fa-phone"></i>
                 ${portfolioData.contact.phoneNumber}
             </a>
