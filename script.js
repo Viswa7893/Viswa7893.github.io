@@ -1,325 +1,399 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // Mobile menu functionality
-    const mobileToggle = document.querySelector('.mobile-nav-toggle');
-    const sidebar = document.getElementById('sidebar');
-    const body = document.body;
-    const mobileNavLinks = document.querySelectorAll('.nav-menu a');
+// ===================================
+// CUSTOM CURSOR
+// ===================================
+const cursor = document.querySelector('.cursor');
+const cursorFollower = document.querySelector('.cursor-follower');
 
-    mobileToggle.addEventListener('click', () => {
-        sidebar.classList.toggle('active');
-        mobileToggle.classList.toggle('active');
-        body.classList.toggle('menu-active');
+let mouseX = 0, mouseY = 0;
+let cursorX = 0, cursorY = 0;
+let followerX = 0, followerY = 0;
+
+document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+});
+
+function animateCursor() {
+    // Smooth cursor movement
+    cursorX += (mouseX - cursorX) * 0.3;
+    cursorY += (mouseY - cursorY) * 0.3;
+    
+    followerX += (mouseX - followerX) * 0.1;
+    followerY += (mouseY - followerY) * 0.1;
+    
+    cursor.style.left = `${cursorX}px`;
+    cursor.style.top = `${cursorY}px`;
+    cursorFollower.style.left = `${followerX}px`;
+    cursorFollower.style.top = `${followerY}px`;
+    
+    requestAnimationFrame(animateCursor);
+}
+
+if (window.innerWidth > 768) {
+    animateCursor();
+}
+
+// Cursor hover effects
+const interactiveElements = document.querySelectorAll('a, button, .magnetic');
+interactiveElements.forEach(el => {
+    el.addEventListener('mouseenter', () => {
+        document.body.classList.add('cursor-hover');
     });
+    el.addEventListener('mouseleave', () => {
+        document.body.classList.remove('cursor-hover');
+    });
+});
 
-    // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-        if (sidebar.classList.contains('active') &&
-            !sidebar.contains(e.target) &&
-            !mobileToggle.contains(e.target)) {
-            sidebar.classList.remove('active');
-            mobileToggle.classList.remove('active');
-            body.classList.remove('menu-active');
+// ===================================
+// SCROLL PROGRESS BAR
+// ===================================
+const scrollProgress = document.querySelector('.scroll-progress');
+
+window.addEventListener('scroll', () => {
+    const scrollPercentage = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+    scrollProgress.style.transform = `scaleX(${scrollPercentage / 100})`;
+});
+
+// ===================================
+// NAVIGATION
+// ===================================
+const nav = document.querySelector('.main-nav');
+const navLinks = document.querySelectorAll('.nav-link');
+const mobileToggle = document.querySelector('.mobile-toggle');
+const navLinksContainer = document.querySelector('.nav-links');
+
+// Scroll effect
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 100) {
+        nav.classList.add('scrolled');
+    } else {
+        nav.classList.remove('scrolled');
+    }
+});
+
+// Active nav link on scroll
+const sections = document.querySelectorAll('.section, .hero');
+
+window.addEventListener('scroll', () => {
+    let current = '';
+    
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        
+        if (window.scrollY >= sectionTop - 200) {
+            current = section.getAttribute('id');
         }
     });
-
-    // Close menu when clicking on a link (for mobile)
-    mobileNavLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            if (window.innerWidth <= 992) {
-                sidebar.classList.remove('active');
-                mobileToggle.classList.remove('active');
-                body.classList.remove('menu-active');
-            }
-        });
+    
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+            link.classList.add('active');
+        }
     });
+});
 
-    // Intersection Observer for scroll animations
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1
-    };
+// Smooth scroll
+navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+        const href = link.getAttribute('href');
+        
+        // Skip for external links
+        if (href.startsWith('http')) return;
+        
+        e.preventDefault();
+        const targetId = href.substring(1);
+        const targetSection = document.getElementById(targetId);
+        
+        if (targetSection) {
+            targetSection.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+        
+        // Close mobile menu if open
+        navLinksContainer.classList.remove('active');
+        mobileToggle.classList.remove('active');
+    });
+});
 
-    const animateOnScroll = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('animate-visible');
-                // Optional: Stop observing after animation
-                // observer.unobserve(entry.target);
-            } else {
-                // Remove class when element is not visible for reverse animation
-                entry.target.classList.remove('animate-visible');
-            }
-        });
-    }, observerOptions);
+// Mobile menu toggle
+mobileToggle.addEventListener('click', () => {
+    mobileToggle.classList.toggle('active');
+    navLinksContainer.classList.toggle('active');
+});
 
-    // Populate About section
-    const aboutContent = document.getElementById('about-content');
-    aboutContent.innerHTML = `
-        <p>${portfolioData.about.greeting}</p>
-        <p style="margin-top: 1em">
-            ${portfolioData.about.description.replace('iOS and macOS Developer', '<span class="highlight">iOS and macOS Developer</span>')}
-        </p>
-    `;
+// ===================================
+// PARTICLE SYSTEM
+// ===================================
+const particlesContainer = document.getElementById('particles');
+const particleCount = 50;
 
-    // Populate Skills section with animation
-    const skillsList = document.getElementById('skills-list');
-    portfolioData.skills.forEach((skill, index) => {
-        const li = document.createElement('li');
-        li.textContent = `${skill.category} : ${skill.items}`;
-        li.style.transitionDelay = `${index * 0.1}s`; // Stagger animation
-        li.classList.add('animate-section');
-        skillsList.appendChild(li);
-        animateOnScroll.observe(li);
+for (let i = 0; i < particleCount; i++) {
+    const particle = document.createElement('div');
+    particle.style.position = 'absolute';
+    particle.style.width = Math.random() * 3 + 1 + 'px';
+    particle.style.height = particle.style.width;
+    particle.style.background = `rgba(0, 217, 255, ${Math.random() * 0.5 + 0.2})`;
+    particle.style.borderRadius = '50%';
+    particle.style.left = Math.random() * 100 + '%';
+    particle.style.top = Math.random() * 100 + '%';
+    particle.style.animation = `float ${Math.random() * 10 + 10}s ease-in-out infinite`;
+    particle.style.animationDelay = Math.random() * 5 + 's';
+    particlesContainer.appendChild(particle);
+}
+
+// ===================================
+// TYPING ANIMATION
+// ===================================
+const typingText = document.querySelector('.typing-text');
+const titles = [
+    'iOS Developer',
+    'macOS Developer',
+    'Swift Expert',
+    'SwiftUI Enthusiast',
+    'Problem Solver'
+];
+
+let titleIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+let typingSpeed = 150;
+
+function typeTitle() {
+    const currentTitle = titles[titleIndex];
+    
+    if (isDeleting) {
+        typingText.textContent = currentTitle.substring(0, charIndex - 1);
+        charIndex--;
+        typingSpeed = 50;
+    } else {
+        typingText.textContent = currentTitle.substring(0, charIndex + 1);
+        charIndex++;
+        typingSpeed = 150;
+    }
+    
+    if (!isDeleting && charIndex === currentTitle.length) {
+        isDeleting = true;
+        typingSpeed = 2000; // Pause at end
+    } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        titleIndex = (titleIndex + 1) % titles.length;
+        typingSpeed = 500;
+    }
+    
+    setTimeout(typeTitle, typingSpeed);
+}
+
+typeTitle();
+
+// ===================================
+// INTERSECTION OBSERVER FOR ANIMATIONS
+// ===================================
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
+};
+
+const fadeInObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('fade-in');
+            setTimeout(() => {
+                entry.target.classList.add('visible');
+            }, 100);
+        }
+    });
+}, observerOptions);
+
+// Observe sections and cards
+document.querySelectorAll('.section, .stat-card, .skill-card, .timeline-item, .project-card, .framework-card').forEach(el => {
+    fadeInObserver.observe(el);
+});
+
+// ===================================
+// COUNTER ANIMATION
+// ===================================
+const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const counter = entry.target;
+            const target = parseInt(counter.getAttribute('data-target'));
+            const duration = 2000;
+            const increment = target / (duration / 16);
+            let current = 0;
+            
+            const updateCounter = () => {
+                current += increment;
+                if (current < target) {
+                    counter.textContent = Math.ceil(current);
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    counter.textContent = target;
+                }
+            };
+            
+            updateCounter();
+            counterObserver.unobserve(counter);
+        }
+    });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.stat-number').forEach(counter => {
+    counterObserver.observe(counter);
+});
+
+// ===================================
+// MAGNETIC BUTTON EFFECT
+// ===================================
+const magneticElements = document.querySelectorAll('.magnetic');
+
+magneticElements.forEach(el => {
+    el.addEventListener('mousemove', (e) => {
+        const rect = el.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        
+        el.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
     });
     
-        // Populate Projects section with animation
-    const projectsList = document.getElementById('projects-list');
-    portfolioData.projects.forEach((project, index) => {
-        const li = document.createElement('li');
-        li.className = 'project-card animate-section';
-        li.style.transitionDelay = `${index * 0.2}s`; // Stagger animation
-        
-        li.innerHTML = `
-            <img src="${project.previewImage}" class="project-image">
-            <div class="project-content">
-                <h3 class="project-title">${project.title}</h3>
-                <p class="project-description">${project.description}</p>
-
-                <div class="project-footer">
-                    <div class="project-technologies">
-                        ${project.technologies.map(tech => `
-                            <span class="project-tech-tag">${tech}</span>
-                        `).join('')}
-                    </div>
-                    <div class="project-repositories">
-                    ${project.appstoreUrl.map(repo => `
-                        <a href="${repo.url}" class="repo-link" target="_blank" rel="noopener noreferrer">
-                            <i class="fab ${repo.icon}"></i>
-                            <span>${repo.name}</span>
-                        </a>
-                    `).join('')}
-                </div>
-                </div>
-            </div>
-        `;
-        
-        projectsList.appendChild(li);
-        animateOnScroll.observe(li);
+    el.addEventListener('mouseleave', () => {
+        el.style.transform = 'translate(0, 0)';
     });
+});
+
+// ===================================
+// POPULATE CONTENT FROM DATA
+// ===================================
+document.addEventListener('DOMContentLoaded', () => {
+    // About section
+    const aboutDescription = document.getElementById('about-description');
+    if (aboutDescription && portfolioData.about) {
+        aboutDescription.textContent = portfolioData.about.description;
+    }
     
-    // Populate Frameworks section with animation
-    const frameworksList = document.getElementById('frameworks-list');
-    if (frameworksList) {
-        portfolioData.frameworks.forEach((repo, index) => {
-            const li = document.createElement('li');
-            li.className = 'framework-card animate-section';
-            li.style.transitionDelay = `${index * 0.2}s`;
-            li.innerHTML = `
-                <img src="${repo.previewImage}" class="project-image" alt="${repo.name} Preview">
+    // Skills section
+    const skillsContainer = document.getElementById('skills-container');
+    if (skillsContainer && portfolioData.skills) {
+        portfolioData.skills.forEach(skill => {
+            const skillCard = document.createElement('div');
+            skillCard.className = 'skill-card fade-in';
+            skillCard.innerHTML = `
+                <h3 class="skill-category">${skill.category}</h3>
+                <p class="skill-items">${skill.items}</p>
+            `;
+            skillsContainer.appendChild(skillCard);
+            fadeInObserver.observe(skillCard);
+        });
+    }
+    
+    // Experience section
+    const experienceContainer = document.getElementById('experience-container');
+    if (experienceContainer && portfolioData.experience) {
+        portfolioData.experience.forEach(job => {
+            const timelineItem = document.createElement('div');
+            timelineItem.className = 'timeline-item fade-in';
+            timelineItem.innerHTML = `
+                <div class="experience-date">${job.period}</div>
+                <h3 class="job-title">${job.title}</h3>
+                <p class="company">${job.company}</p>
+                <ul class="experience-details">
+                    ${job.responsibilities.map(resp => `<li>${resp}</li>`).join('')}
+                </ul>
+                <div class="tags">
+                    ${job.technologies.map(tech => `<span class="tag">${tech}</span>`).join('')}
+                </div>
+            `;
+            experienceContainer.appendChild(timelineItem);
+            fadeInObserver.observe(timelineItem);
+        });
+    }
+    
+    // Projects section
+    const projectsContainer = document.getElementById('projects-container');
+    if (projectsContainer && portfolioData.projects) {
+        portfolioData.projects.forEach(project => {
+            const projectCard = document.createElement('div');
+            projectCard.className = 'project-card fade-in';
+            projectCard.innerHTML = `
+                <img src="${project.previewImage}" alt="${project.title}" class="project-image">
                 <div class="project-content">
-                    <h3 class="project-title">${repo.name}</h3>
-                    <p class="project-description">${repo.description}</p>
+                    <h3 class="project-title">${project.title}</h3>
+                    <p class="project-description">${project.description}</p>
+                    <div class="project-footer">
+                        <div class="project-technologies">
+                            ${project.technologies.map(tech => `
+                                <span class="project-tech-tag">${tech}</span>
+                            `).join('')}
+                        </div>
+                        <div class="project-repositories">
+                            ${project.appstoreUrl.map(repo => `
+                                <a href="${repo.url}" class="repo-link" target="_blank" rel="noopener noreferrer">
+                                    <i class="fab ${repo.icon}"></i>
+                                    <span>${repo.name}</span>
+                                </a>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+            projectsContainer.appendChild(projectCard);
+            fadeInObserver.observe(projectCard);
+        });
+    }
+    
+    // Frameworks section
+    const frameworksContainer = document.getElementById('frameworks-container');
+    if (frameworksContainer && portfolioData.frameworks) {
+        portfolioData.frameworks.forEach(framework => {
+            const frameworkCard = document.createElement('div');
+            frameworkCard.className = 'framework-card fade-in';
+            frameworkCard.innerHTML = `
+                <img src="${framework.previewImage}" alt="${framework.name}" class="project-image">
+                <div class="project-content">
+                    <h3 class="project-title">${framework.name}</h3>
+                    <p class="project-description">${framework.description}</p>
                     <div class="project-footer">
                         <div class="project-repositories">
-                            <a href="${repo.url}" class="repo-link" target="_blank" rel="noopener noreferrer">
+                            <a href="${framework.url}" class="repo-link" target="_blank" rel="noopener noreferrer">
                                 <i class="fab fa-github"></i>
-                                <span>GitHub</span>
+                                <span>View on GitHub</span>
                             </a>
                         </div>
                     </div>
                 </div>
             `;
-            frameworksList.appendChild(li);
-            animateOnScroll.observe(li);
+            frameworksContainer.appendChild(frameworkCard);
+            fadeInObserver.observe(frameworkCard);
         });
-    }
-
-    // Populate Experience section with animation
-    const experienceContent = document.getElementById('experience-content');
-    portfolioData.experience.forEach((job, index) => {
-        const jobElement = document.createElement('div');
-        jobElement.className = 'experience-item animate-section';
-        jobElement.style.transitionDelay = `${index * 0.2}s`; // Stagger animation
-        jobElement.innerHTML = `
-            <div class="experience-date">${job.period}</div>
-            <div class="job-title">${job.title}</div>
-            <div class="company">${job.company}</div>
-            <ul class="experience-details">
-                ${job.responsibilities.map(resp => `<li>${resp}</li>`).join('')}
-            </ul>
-            <div class="tags">
-                ${job.technologies.map(tech => `<span class="tag">${tech}</span>`).join('')}
-            </div>
-        `;
-        experienceContent.appendChild(jobElement);
-        animateOnScroll.observe(jobElement);
-    });
-
-    // Populate Education section with animation
-    const educationContent = document.getElementById('education-content');
-    portfolioData.education.forEach((edu, index) => {
-        const eduElement = document.createElement('div');
-        eduElement.className = 'education-item animate-section';
-        eduElement.style.transitionDelay = `${index * 0.2}s`; // Stagger animation
-        eduElement.innerHTML = `
-            <div class="education-date">${edu.period}</div>
-            <div class="education-degree">${edu.degree}</div>
-            <div class="education-school">${edu.school}</div>
-            ${edu.subjects ? `
-                <div class="subjects">
-                    ${edu.subjects.map(subject => `<span class="subject">${subject}</span>`).join('')}
-                </div>
-            ` : ''}
-        `;
-        educationContent.appendChild(eduElement);
-        animateOnScroll.observe(eduElement);
-    });
-
-    // Populate Contact section with animation
-    const contactContent = document.getElementById('contact-content');
-    contactContent.innerHTML = `
-        <div class="social-links animate-section">
-            ${portfolioData.contact.social.map(social => `
-                <a href="${social.url}" class="social-link ${social.class}" target="_blank" rel="noopener noreferrer">
-                    <i class="fab ${social.icon}"></i>
-                    <span>${social.platform}</span>
-                </a>
-            `).join('')}
-        </div>
-        <div class="contact-info animate-section">
-            <p>${portfolioData.contact.message}</p>
-            <a href="mailto:${portfolioData.contact.email}" class="email-link">
-                <i class="fas fa-envelope"></i>
-                ${portfolioData.contact.email}
-            </a>
-          <br></br>
-           <a href="tel:+91 9133951393" class="phone-link">
-                <i class="fas fa-phone"></i>
-                ${portfolioData.contact.phoneNumber}
-            </a>
-        </div>
-    `;
-
-    // Observe contact section elements
-    contactContent.querySelectorAll('.animate-section').forEach(element => {
-        animateOnScroll.observe(element);
-    });
-
-    // Initialize section observers
-    document.querySelectorAll('section').forEach(section => {
-        section.classList.add('animate-section');
-        animateOnScroll.observe(section);
-    });
-
-    const sections = document.querySelectorAll('section');
-    const navLinks = document.querySelectorAll('.nav-menu a');
-
-    // Function to update active nav link
-    function updateActiveSection() {
-        let currentSection = '';
-        
-        // Check if we're at the bottom of the page
-        const isAtBottom = window.innerHeight + window.pageYOffset >= document.body.offsetHeight - 100;
-        
-        if (isAtBottom) {
-            currentSection = 'contact';
-        } else {
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                
-                if (window.pageYOffset >= sectionTop - 200 && 
-                    window.pageYOffset < sectionTop + sectionHeight - 200) {
-                    currentSection = section.getAttribute('id');
-                }
-            });
-        }
-
-        // Update active class on nav links
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href').substring(1) === currentSection) {
-                link.classList.add('active');
-            }
-        });
-    }
-
-    // // Navigation click handler with offset
-    // navLinks.forEach(link => {
-    //     link.addEventListener('click', (e) => {
-    //         e.preventDefault();
-            
-    //         const targetId = link.getAttribute('href');
-    //         const targetSection = document.querySelector(targetId);
-            
-    //         navLinks.forEach(a => a.classList.remove('active'));
-    //         link.classList.add('active');
-            
-    //         const offset = 50;
-    //         const targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset - offset;
-            
-    //         window.scrollTo({
-    //             top: targetPosition,
-    //             behavior: 'smooth'
-    //         });
-    //     });
-    // });
-
-        // Navigation click handler with offset
-    navLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            const href = link.getAttribute('href');
-            
-            // Check if this is an external link (like resume)
-            if (href.startsWith('http') || href.startsWith('https')) {
-                // Let the default behavior happen for external links
-                return;
-            }
-            
-            // For internal navigation
-            e.preventDefault();
-            const targetId = href;
-            const targetSection = document.querySelector(targetId);
-            
-            navLinks.forEach(a => a.classList.remove('active'));
-            link.classList.add('active');
-            
-            const offset = 50;
-            const targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset - offset;
-            
-            window.scrollTo({
-                top: targetPosition,
-                behavior: 'smooth'
-            });
-        });
-    });
-
-    // Add scroll event listener with throttling
-    let ticking = false;
-    window.addEventListener('scroll', () => {
-        if (!ticking) {
-            window.requestAnimationFrame(() => {
-                updateActiveSection();
-                ticking = false;
-            });
-            ticking = true;
-        }
-    });
-
-    // Initial check for active section
-    setTimeout(updateActiveSection, 100);
-    
-    // Footer animation on scroll
-    const footer = document.querySelector('footer');
-    if (footer) {
-        animateOnScroll.observe(footer);
-        footer.classList.add('animate-section');
-        
-        // Add dynamic year to copyright if needed
-        const yearSpan = footer.querySelector('.current-year');
-        if (yearSpan) {
-            yearSpan.textContent = new Date().getFullYear();
-        }
     }
 });
+
+// ===================================
+// PARALLAX EFFECT
+// ===================================
+window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const parallaxElements = document.querySelectorAll('.float-element');
+    
+    parallaxElements.forEach(el => {
+        const speed = el.getAttribute('data-speed') || 2;
+        el.style.transform = `translateY(${scrolled * speed * 0.1}px)`;
+    });
+});
+
+// ===================================
+// PREVENT FLASH ON LOAD
+// ===================================
+window.addEventListener('load', () => {
+    document.body.style.opacity = '1';
+});
+
+// Add initial opacity to body in CSS
+document.body.style.opacity = '0';
+document.body.style.transition = 'opacity 0.5s ease';
+
+console.log('%c🚀 Portfolio Loaded Successfully!', 'font-size: 20px; color: #00D9FF; font-weight: bold;');
+console.log('%cBuilt with passion by Durga Viswanadh Nemala', 'font-size: 14px; color: #7B2FFF;');

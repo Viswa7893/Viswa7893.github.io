@@ -1,10 +1,16 @@
-const portfolioData = {
+const portfolioData = { //https://github.com/Viswa7893/DeepXCleaner
     frameworks: [
         {
             name: "DVSwiftNet",
             url: "https://github.com/Viswa7893/DVSwiftNet",
             description: "A modern, extensible, and lightweight Swift networking framework for iOS, macOS, and cross-platform Swift projects.",
             previewImage: "https://opengraph.githubassets.com/1/Viswa7893/DVSwiftNet"
+        },
+        {
+            name: "DeepXCleaner",
+            url: "https://github.com/Viswa7893/DeepXCleaner",
+            description: "A sleek, modern, beautifully animated macOS menu bar app that deeply cleans Xcode's unwanted files — freeing up gigabytes in a single click.",
+            previewImage: "https://opengraph.githubassets.com/1/Viswa7893/DeepXCleaner"
         },
     ],
     about: {
@@ -19,7 +25,7 @@ const portfolioData = {
         { category: "Web Services", items: "Swift Vapor" },
         { category: "Tools", items: "Xcode, Postman, PgAdmin, Filezilla" },
         { category: "APIs", items: "RESTful APIs" },
-        { category: "Architecture", items: "MVC, MVVM" },
+        { category: "Architecture", items: "MVC, MVVM, MVP" },
         { category: "Concurrency", items: "Swift Concurrency (async/await, GCD)" },
         { category: "Version Control", items: "Git" },
         { category: "Database", items: "CoreData, SQL Lite" }
@@ -118,14 +124,26 @@ const portfolioData = {
 
     experience: [
         {
+            period: "March 2025 - Present",
+            title: "iOS Developer",
+            company: "Prodevens Technologies Private Limited",
+            responsibilities: [
+                "Leading the development of scalable iOS applications using Swift, SwiftUI and Clean Architecture principles.",
+                "Reduced App Size by 35% through refactoring and memory check in code.",
+                "Played a key role in migrating legacy UIKit code to SwiftUI, reducing tech debt and improving maintainability.",
+                "Built and maintained reusable Swift Packages and internal frameworks to ensure code reuse across multiple apps."
+            ],
+            technologies: ["Swift", "SwiftUI", "iOS"]
+        },
+        {
             period: "August 2022 - January 2025",
             title: "iOS and macOS Developer",
             company: "Krify Software Technologies",
             responsibilities: [
-                "Designed and developed applications for iOS and macOS platforms using Swift, SwiftUI and Objective-C.",
-                "Collaborated with cross-functional teams to define and implement new features.",
-                "Conducted code reviews and provided constructive feedback to improve code quality and maintainability.",
-                "Developed and executed XCTestCases for both existing and ongoing projects, ensuring robust and reliable code quality.",
+                "Built and maintained feature-rich iOS apps using Swift, SwiftUI, Objective-C, and MVVM architecture.",
+                "Reduced crash rates by 35% through proactive monitoring and refactoring.",
+                "Introduced SwiftUI in the organization, developed apps with more impressive animations for good user experience.",
+                "Integrated in-app purchase flows and dynamic subscription handling using StoreKit.",
                 "Designed and implemented APIs using Swift Vapor, streamlining server-side functionality.",
                 "Pioneered macOS and SwiftUI development within the company, establishing a foundation for future macOS and SwiftUI projects."
             ],
@@ -136,9 +154,10 @@ const portfolioData = {
             title: "iOS Developer",
             company: "SPGON Software Solutions LLP",
             responsibilities: [
-                "Integrated third-party libraries and APIs to extend application functionality and improve performance.",
-                "Participated in sprint planning, daily stand-ups, and retrospective meetings to ensure project milestones were met on time.",
-                "Mentored junior developers, fostering a culture of continuous learning and knowledge sharing within the team."
+                "Integrated third-party SDKs (Firebase, Maps API) and RESTful APIs.",
+                "Boosted UI performance by 28% through layout optimizations and lazy loading.",
+                "Improved offline support using CoreData and async syncing.",
+                "Led end-to-end feature development in Agile sprints."
             ],
             technologies: ["Objective-C", "Swift"]
         }
@@ -158,17 +177,17 @@ const portfolioData = {
                 "Cryptography"
             ]
         },
-        {
-            period: "2013 - 2015",
-            degree: "Intermediate (Class 12th)",
-            school: "Board of Intermediate Education, Andhra Pradesh",
-            subjects: ["Physics", "Chemistry", "Mathematics"]
-        },
-        {
-            period: "2013",
-            degree: "Class 10th",
-            school: "Board of Secondary Education, Andhra Pradesh"
-        }
+        // {
+            // period: "2013 - 2015",
+            // degree: "Intermediate (Class 12th)",
+            // school: "Board of Intermediate Education, Andhra Pradesh",
+            // subjects: ["Physics", "Chemistry", "Mathematics"]
+        // },
+        // {
+            // period: "2013",
+            // degree: "Class 10th",
+            // school: "Board of Secondary Education, Andhra Pradesh"
+        // }
     ],
 
     contact: {

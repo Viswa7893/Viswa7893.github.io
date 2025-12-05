@@ -1,83 +1,266 @@
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Durga Viswanadh Nemala - Portfolio</title>
-        <link rel="stylesheet" href="complete-styles.css">
-        <!-- Font Awesome for social icons -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-        <!-- Favicon -->
-       <link rel="icon" href="profile-img.jpg" type="image/jpeg">
-    </head>
-    <body>
-        <button class="mobile-nav-toggle"></button>
-        <div id="sidebar">
-            <img src="profile-img.jpg" alt="Profile" class="profile-img">
-            <h2 class="name">Durga Viswanadh Nemala</h2>
-            <ul class="nav-menu">
-                <li><a href="#about" class="active"><i class="fa fa-user"></i> ABOUT</a></li>
-                <li><a href="#skills"><i class="fa fa-bolt"></i> SKILLS</a></li>
-                <li><a href="#experience"><i class="fa fa-briefcase"></i> WORK EXPERIENCE</a></li>
-                <li><a href="#projects"><i class="fa fa-diagram-project"></i> Projects</a></li>
-                <li><a href="#frameworks"><i class="fa fa-cubes"></i> FRAMEWORKS</a></li>
-                <li><a href="#education"><i class="fa fa-graduation-cap"></i> EDUCATION</a></li>
-                <li><a href="#contact"><i class="fa fa-envelope"></i> CONTACT</a></li>
-                <li><a href="https://Viswa7893.github.io/resume/DurgaViswanadh_resume.pdf" target="_blank" class="resume-link"><i class="fa fa-file-lines"></i> RESUME</a></li>
-            </ul>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Durga Viswanadh Nemala - iOS & macOS Developer</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" href="profile-img.jpg" type="image/jpeg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+    
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress"></div>
+    
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="logo">
+            <span class="logo-text">DV</span>
         </div>
+        <button class="mobile-toggle" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="nav-links">
+            <li><a href="#hero" class="nav-link active" data-text="Home">Home</a></li>
+            <li><a href="#about" class="nav-link" data-text="About">About</a></li>
+            <li><a href="#skills" class="nav-link" data-text="Skills">Skills</a></li>
+            <li><a href="#experience" class="nav-link" data-text="Experience">Experience</a></li>
+            <li><a href="#projects" class="nav-link" data-text="Projects">Projects</a></li>
+            <li><a href="#contact" class="nav-link" data-text="Contact">Contact</a></li>
+            <li><a href="https://Viswa7893.github.io/resume/resume/DurgaViswanadh_iOS_Developer_Resume.pdf" target="_blank" class="nav-link resume-btn">Resume</a></li>
+        </ul>
+    </nav>
 
-        <div id="main-content">
-            <section id="about">
-                <h1><span class="highlight">About</span></h1>
-                <div id="about-content"></div>
-            </section>
+    <!-- Particle Background -->
+    <div id="particles"></div>
 
-            <section id="skills">
-                <h1><span class="highlight">Skills</span></h1>
-                <ul id="skills-list" class="skills-list"></ul>
-            </section>
-
-            <section id="experience">
-                <h1><span class="highlight">Work Experience</span></h1>
-                <div id="experience-content"></div>
-            </section>
-
-            <section id="projects">
-                <h1><span class="highlight">Projects</span></h1>
-                <ul id="projects-list" class="projects-list"></ul>
-            </section>
-
-            <section id="frameworks">
-                <h1><span class="highlight">Framework, SPM, Libraries</span></h1>
-                <ul id="frameworks-list" class="frameworks-list"></ul>
-            </section>
-
-            <section id="education">
-                <h1><span class="highlight">Education</span></h1>
-                <div id="education-content"></div>
-            </section>
-
-            <section id="contact">
-                <h1><span class="highlight">Contact</span></h1>
-                <div id="contact-content"></div>
-            </section>
-            
-            <footer>
-                <div class="footer-content">
-                    <span class="copyright">
-                        <span>Made with</span>
-                        <span class="heart">❤</span>
-                        <span>by</span>
-                        <span class="name">Durga Viswanadh Nemala</span>
-                    </span>
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="hero-greeting animate-text">
+                    <span>Hi, I'm</span>
                 </div>
-            </footer>
+                <h1 class="hero-name">
+                    <span class="name-line">Durga Viswanadh</span>
+                    <span class="name-line">Nemala</span>
+                </h1>
+                <div class="hero-title">
+                    <span class="typing-text"></span>
+                    <span class="cursor-blink">|</span>
+                </div>
+                <p class="hero-description">
+                    Crafting seamless, high-performing applications for Apple's ecosystem. 
+                    Specializing in Swift, SwiftUI, and innovative iOS/macOS solutions.
+                </p>
+                <div class="hero-cta">
+                    <a href="#projects" class="btn btn-primary magnetic">
+                        <span>View My Work</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="#contact" class="btn btn-secondary magnetic">
+                        <span>Get In Touch</span>
+                    </a>
+                </div>
+                <div class="social-icons">
+                    <a href="https://github.com/viswa7893" class="social-icon magnetic" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/nemala-durga-viswanadh/" class="social-icon magnetic" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://medium.com/@durgaviswanadh" class="social-icon magnetic" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-medium"></i>
+                    </a>
+                    <a href="https://www.instagram.com/durga_viswanadh/" class="social-icon magnetic" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="profile-container">
+                    <div class="profile-ring"></div>
+                    <div class="profile-ring-2"></div>
+                    <img src="profile-img.jpg" alt="Durga Viswanadh Nemala" class="profile-image">
+                    <div class="floating-elements">
+                        <div class="float-element" data-speed="2">
+                            <i class="fab fa-swift"></i>
+                        </div>
+                        <div class="float-element" data-speed="3">
+                            <i class="fab fa-apple"></i>
+                        </div>
+                        <div class="float-element" data-speed="1.5">
+                            <i class="fas fa-code"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+        <div class="scroll-indicator">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+            <span>Scroll Down</span>
+        </div>
+    </section>
 
-        <!-- Load data first -->
-        <script src="updated-data.js"></script>
-        <!-- Then load the main script -->
-        <script src="script.js"></script>
-    </body>
-    </html>
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">01</span>
+                <h2 class="section-title">About Me</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <p class="lead-text" id="about-description"></p>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number" data-target="5">0</div>
+                            <div class="stat-label">Years Experience</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" data-target="10">0</div>
+                            <div class="stat-label">Projects Completed</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" data-target="5">0</div>
+                            <div class="stat-label">Technologies Mastered</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">02</span>
+                <h2 class="section-title">Skills & Technologies</h2>
+            </div>
+            <div class="skills-grid" id="skills-container"></div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">03</span>
+                <h2 class="section-title">Work Experience</h2>
+            </div>
+            <div class="timeline" id="experience-container"></div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">04</span>
+                <h2 class="section-title">Featured Projects</h2>
+            </div>
+            <div class="projects-grid" id="projects-container"></div>
+        </div>
+    </section>
+
+    <!-- Frameworks Section -->
+    <section id="frameworks" class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">05</span>
+                <h2 class="section-title">Frameworks & Libraries</h2>
+            </div>
+            <div class="frameworks-grid" id="frameworks-container"></div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <div class="section-header center">
+                <span class="section-number">06</span>
+                <h2 class="section-title">Let's Connect</h2>
+                <p class="section-subtitle">Got a project in mind? Let's bring it to life together.</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-card magnetic">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Email</h4>
+                            <a href="mailto:durgaviswanadhnemala@gmail.com">durgaviswanadhnemala@gmail.com</a>
+                        </div>
+                    </div>
+                    <div class="contact-card magnetic">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Phone</h4>
+                            <a href="tel:+919133951393">+91 9133951393</a>
+                        </div>
+                    </div>
+                    <div class="contact-card magnetic">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Location</h4>
+                            <p>Hyderabad, Telangana, India</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="social-links-large">
+                    <a href="https://github.com/viswa7893" class="social-link-large magnetic" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-github"></i>
+                        <span>GitHub</span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/nemala-durga-viswanadh/" class="social-link-large magnetic" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-linkedin"></i>
+                        <span>LinkedIn</span>
+                    </a>
+                    <a href="https://medium.com/@durgaviswanadh" class="social-link-large magnetic" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-medium"></i>
+                        <span>Medium</span>
+                    </a>
+                    <a href="https://www.instagram.com/durga_viswanadh/" class="social-link-large magnetic" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-instagram"></i>
+                        <span>Instagram</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>
+                    <span>Designed & Built with</span>
+                    <span class="heart">❤</span>
+                    <span>by Durga Viswanadh Nemala</span>
+                </p>
+                <p class="footer-year">© 2024 All Rights Reserved</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="updated-data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
